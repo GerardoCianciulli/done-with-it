@@ -4,27 +4,56 @@
     "slug": "done-with-it",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./app/assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "image": "./app/assets/splash-icon.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#e63c4b"
     },
     "ios": {
-      "supportsTablet": true
+      "config": {
+        "usesNonExemptEncryption": false
+      },
+      "supportsTablet": true,
+      "bundleIdentifier": "com.gerardo.cianciulli.donewithit",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/android-icon-foreground.png",
-        "backgroundImage": "./assets/android-icon-background.png",
-        "monochromeImage": "./assets/android-icon-monochrome.png"
+        "foregroundImage": "./app/assets/android-icon-foreground.png",
+        "backgroundImage": "./app/assets/android-icon-background.png",
+        "monochromeImage": "./app/assets/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.gerardo.cianciulli.donewithit"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./app/assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-secure-store",
+        {
+          "configureAndroidBackup": true,
+          "faceIDPermission": "Allow $(PRODUCT_NAME) to access your Face ID biometric data."
+        }
+      ],
+      "expo-image",
+      "expo-font",
+      "expo-secure-store",
+      "@bugsnag/plugin-expo-eas-sourcemaps"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "d503f3d2-39db-4192-b5d6-9af00e6ba77f"
+      },
+      "bugsnag": {
+        "apiKey": "889ae8412ef80a8af7ce8ae1a0b117e9"
+      }
     }
   }
 }
