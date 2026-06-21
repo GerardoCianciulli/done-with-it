@@ -37,13 +37,15 @@ function Card({
           source={{ uri: imageUrl }}
           style={[styles.image, imageStyle]}
         />
-        <View style={styles.detailsContainer}>
+        <View style={styles.textContainer}>
           <Text style={[styles.title, titleStyle]} numberOfLines={1}>
             {title}
           </Text>
-          <Text style={[styles.description, descriptionStyle]}>
-            {description}
-          </Text>
+          {description && (
+            <Text style={[styles.description, descriptionStyle]}>
+              {description}
+            </Text>
+          )}
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -63,7 +65,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 200,
   },
-  detailsContainer: {
+  textContainer: {
     padding: 20,
   },
   title: {

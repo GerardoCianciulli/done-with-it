@@ -3,10 +3,13 @@ import MapView, { Marker } from "react-native-maps";
 
 import useLocation from "../hooks/useLocation";
 
-type MapProps = {};
+type MapProps = {
+  location: { latitude: number; longitude: number } | undefined;
+};
 
-function Map({}: MapProps) {
-  const location = useLocation();
+function Map({ location }: MapProps) {
+  if (!location) location = useLocation();
+
   return (
     <View style={styles.container}>
       <MapView

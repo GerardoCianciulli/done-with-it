@@ -193,7 +193,7 @@ function ListingEditScreen() {
         />
         <SubmitButton title="Post" />
       </Form>
-      <Map />
+      <Map location={undefined} />
     </SafeAreaView>
   );
 }

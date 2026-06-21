@@ -20,6 +20,7 @@ type ListItemProps = {
   iconComponent?: ReactNode;
   imagePath?: ImageSourcePropType;
   onPress?: () => void;
+  numberOfLines?: number;
   renderRightActions?: (
     progress: SharedValue<number>,
     dragX: SharedValue<number>,
@@ -33,6 +34,7 @@ function ListItem({
   iconComponent,
   imagePath,
   onPress,
+  numberOfLines,
   renderRightActions,
   showChevrons,
 }: ListItemProps) {
@@ -47,11 +49,17 @@ function ListItem({
           {imagePath && <Image source={imagePath} style={styles.image} />}
           {iconComponent}
           <View style={styles.textContainer}>
-            <Text style={styles.title} numberOfLines={1}>
+            <Text
+              style={styles.title}
+              numberOfLines={numberOfLines === undefined ? 0 : numberOfLines}
+            >
               {title}
             </Text>
             {description && (
-              <Text style={styles.description} numberOfLines={3}>
+              <Text
+                style={styles.description}
+                numberOfLines={numberOfLines === undefined ? 3 : numberOfLines}
+              >
                 {description}
               </Text>
             )}

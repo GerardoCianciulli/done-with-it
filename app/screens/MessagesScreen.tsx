@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { FlatList } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useEffect, useState } from "react";
+import { FlatList, StyleSheet, View } from "react-native";
 import { SharedValue } from "react-native-reanimated";
 
 import {
@@ -9,67 +8,58 @@ import {
   ListItemDeleteAction,
 } from "../components/lists";
 
-const initialMessages = [
-  {
-    id: "1",
-    title:
-      "T1 Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    description:
-      "D1 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    imagePath: require("../assets/avatar.png"),
-  },
-  {
-    id: "2",
-    title:
-      "T2 Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    description:
-      "D2 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    imagePath: require("../assets/avatar.png"),
-  },
-  {
-    id: "3",
-    title:
-      "T3 Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    description:
-      "D3 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    imagePath: require("../assets/avatar.png"),
-  },
-  {
-    id: "4",
-    title:
-      "T4 Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    description:
-      "D4 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    imagePath: require("../assets/avatar.png"),
-  },
-];
+import useAuth from "../hooks/useAuth";
+import myMessages from "../api/messages";
+import logger from "../utility/logger";
 
 type Message = {
-  id: string;
-  title: string;
-  description: string;
-  imagePath: any;
+  content: string;
+  dateTime: number;
+  fromUser: { id: number; name: string };
+  id: number;
+  listingId: number;
+  toUser: { id: number; name: string };
 };
 
 function MessagesScreen() {
-  const [messages, setMessages] = useState(initialMessages);
+  const { user } = useAuth();
+  const [messages, setMessages] = useState<Message[]>([]);
   const [refreshing, setRefreshing] = useState(false);
+
+  const getMessages = async () => {
+    const result = await myMessages.getMessages();
+    if (!result.ok) {
+      return logger.log(new Error(result.originalError as any));
+    }
+
+    if (result.data && Array.isArray(result.data)) {
+      const tempMessages = result.data.filter((value: Message) => {
+        return value.toUser.id === user?.userId;
+      });
+
+      setMessages(tempMessages);
+    }
+  };
+
+  useEffect(() => {
+    getMessages();
+  }, []);
 
   const handleDelete = (message: Message) => {
     // Delete mssage from messages
-    setMessages(messages.filter((m) => m.id !== message.id));
+    setMessages(messages?.filter((m) => m.id !== message.id));
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <View style={styles.screen}>
       <FlatList
         data={messages}
-        keyExtractor={(message) => message.id}
+        keyExtractor={(message) => message.id.toString()}
         renderItem={({ item }) => (
           <ListItem
-            title={item.title}
-            description={item.description}
-            imagePath={item.imagePath}
+            title={item.content}
+            description={item.fromUser.name}
+            numberOfLines={0}
             renderRightActions={(
               progress: SharedValue<number>,
               dragX: SharedValue<number>,
@@ -83,10 +73,17 @@ function MessagesScreen() {
         )}
         ItemSeparatorComponent={<ListItemSeporator />}
         refreshing={refreshing}
-        onRefresh={() => setMessages(initialMessages)}
+        onRefresh={() => setMessages([])}
       />
-    </SafeAreaView>
+    </View>
   );
 }
 
 export default MessagesScreen;
+
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    paddingVertical: 20,
+  },
+});

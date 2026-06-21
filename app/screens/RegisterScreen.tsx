@@ -6,7 +6,7 @@ import { Image } from "expo-image";
 import { Form, FormField, SubmitButton } from "../components/forms";
 import Text from "../components/Text";
 
-import usersAPI from "../api/users";
+import userAPI from "../api/user";
 import authAPI from "../api/auth";
 import useAuth from "../hooks/useAuth";
 import colors from "../config/colors";
@@ -26,7 +26,7 @@ function RegisterScreen() {
     email: string;
     password: string;
   }) => {
-    const result = await usersAPI.register(userInfo);
+    const result = await userAPI.register(userInfo);
     if (!result.ok) {
       if (
         result.data &&
