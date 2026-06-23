@@ -48,11 +48,40 @@ node index
 
 ### Built with
 
-- React Native
+- Async Storage
+- Netinfo
+- Apisauce
+- Dayjs
 - Expo
-- TypeScript
-- Semantic HTML5 markup
+- Expo Application
+- Expo Constants
+- Expo Crypto
+- Expo Device
+- Expo File System
+- Expo Font
+- Expo Image
+- Expo Image Picker
+- Expo Location
+- Expo Secure Store
+- Expo Splash Screen
+- Expo Updates
 - Flexbox
+- Formik
+- JWT Decode
+- Lottie
+- React
+- React Native
+- React Native Gesture Handler
+- React Native Maps
+- React Native Progress
+- React Native Ranimated
+- React Native SVG
+- React Navigation
+- Safe Area Context
+- Semantic HTML5 markup
+- TypeScript
+- Vector Icons
+- Yup
 
 ### What I learned
 
