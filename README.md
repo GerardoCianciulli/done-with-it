@@ -49,6 +49,7 @@ node index
 ### Built with
 
 - Async Storage
+- Bugsnag
 - Netinfo
 - Apisauce
 - Dayjs
