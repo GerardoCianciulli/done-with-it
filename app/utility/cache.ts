@@ -5,7 +5,6 @@ import logger from "./logger";
 
 const prefix = "cache";
 const expiryInMinutes = 5;
-let keys = [];
 
 const storeData = async (key: string, value: string) => {
   const item = {
