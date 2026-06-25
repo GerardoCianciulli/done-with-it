@@ -7,7 +7,7 @@ function useLocation() {
   const [location, setLocation] = useState<Location.LocationObject | undefined | null>(
     null,
   );
-
+  
   useEffect(() => {
     getCurrentLocation();
   }, []);
@@ -31,6 +31,7 @@ function useLocation() {
         longitude: location?.coords?.longitude,
       }
     : null;
+    
 }
 
 export default useLocation;

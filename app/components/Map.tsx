@@ -9,27 +9,29 @@ type MapProps = {
 
 function Map({ location }: MapProps) {
   if (location === undefined || location === null) location = useLocation();
-
+  console.log("location from Map", location);
   return (
-    <View style={styles.container}>
-      <MapView
-        style={styles.map}
-        region={{
-          latitude: location?.latitude || 0, // Center point latitude
-          longitude: location?.longitude || 0, // Center point longitude
-          latitudeDelta: 0.0922, // Vertical zoom level (approx. 111km per degree)
-          longitudeDelta: 0.0421, // Horizontal zoom level
-        }}
-      >
-        <Marker
-          key={0}
-          coordinate={{
-            latitude: location?.latitude || 0,
-            longitude: location?.longitude || 0,
+    location && (
+      <View style={styles.container}>
+        <MapView
+          style={styles.map}
+          region={{
+            latitude: location?.latitude || 0, // Center point latitude
+            longitude: location?.longitude || 0, // Center point longitude
+            latitudeDelta: 0.0922, // Vertical zoom level (approx. 111km per degree)
+            longitudeDelta: 0.0421, // Horizontal zoom level
           }}
-        />
-      </MapView>
-    </View>
+        >
+          <Marker
+            key={0}
+            coordinate={{
+              latitude: location?.latitude || 0,
+              longitude: location?.longitude || 0,
+            }}
+          />
+        </MapView>
+      </View>
+    )
   );
 }
 

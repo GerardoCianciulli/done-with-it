@@ -4,6 +4,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import LottieView from "lottie-react-native";
+import * as Location from "expo-location";
+import * as ImagePicker from "expo-image-picker";
 
 import AppText from "../components/Text";
 import Button from "../components/Button";
@@ -13,6 +15,7 @@ import { ListItemSeporator } from "../components/lists";
 import listingsApi from "../api/listings";
 import routes from "../navigation/routes";
 import { useApi } from "../hooks/useApi";
+import logger from "../utility/logger";
 
 type Listing = {
   categoryId: number;
@@ -57,6 +60,19 @@ function ListingsScreen() {
 
   useEffect(() => {
     loadListings();
+  }, []);
+
+  const requestPermissions = async () => {
+    try {
+      await Location.requestForegroundPermissionsAsync();
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
+    } catch (error: any) {
+      logger.log(new Error(error));
+    }
+  };
+
+  useEffect(() => {
+    requestPermissions();
   }, []);
 
   return (

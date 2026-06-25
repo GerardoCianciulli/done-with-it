@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Alert, StyleSheet, TouchableOpacity, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
@@ -15,12 +15,14 @@ type ImageInputProps = {
 };
 
 function ImageInput({ imageUri, onChangeImage }: ImageInputProps) {
+  const [mediaLibraryPermissions, setMediaLibraryPermissions] = useState(false);
   useEffect(() => {
     requestPermission();
   }, []);
 
   const requestPermission = async () => {
     const { granted } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    setMediaLibraryPermissions(granted);
     if (!granted)
       Alert.alert(
         "Permission required",
@@ -53,7 +55,10 @@ function ImageInput({ imageUri, onChangeImage }: ImageInputProps) {
   };
 
   return (
-    <TouchableOpacity onPress={handlePress}>
+    <TouchableOpacity
+      activeOpacity={mediaLibraryPermissions ? 0.2 : 1}
+      onPress={mediaLibraryPermissions ? handlePress : () => {}}
+    >
       <View style={styles.container}>
         {imageUri && imageUri.length > 0 ? (
           <Image source={{ uri: imageUri }} style={styles.image} />
