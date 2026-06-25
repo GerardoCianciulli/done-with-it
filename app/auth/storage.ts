@@ -17,13 +17,17 @@ const getToken = async () => {
   try {
     return await SecureStore.getItemAsync(key);
   } catch (error: any) {
-    logger.log(new Error("Error getting the auth token. ", error));
+    logger.log(new Error("Error retrieving the auth token. ", error));
   }
 };
 
 const getUser = async () => {
+  try {
   const token = await getToken();
   return token ? jwtDecode(token as string) : null;
+  } catch (error:any){
+    logger.log(new Error("Error retrieving the user data. ", error));
+  }
 };
 
 const removeToken = async () => {

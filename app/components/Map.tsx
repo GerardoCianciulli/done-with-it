@@ -4,11 +4,11 @@ import MapView, { Marker } from "react-native-maps";
 import useLocation from "../hooks/useLocation";
 
 type MapProps = {
-  location: { latitude: number; longitude: number } | undefined;
+  location: { latitude: number; longitude: number } | undefined | null;
 };
 
 function Map({ location }: MapProps) {
-  if (!location) location = useLocation();
+  if (location === undefined || location === null) location = useLocation();
 
   return (
     <View style={styles.container}>

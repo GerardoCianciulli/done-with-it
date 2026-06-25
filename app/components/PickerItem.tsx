@@ -4,28 +4,17 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Icon from "./Icon";
 import Text from "./Text";
 
+import { ColorsType } from "../config/colors";
+
+export type PickerItemType = {
+  backgroundColor: ColorsType;
+  iconName: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
+  label: string;
+  value: number;
+};
+
 type PickerItemProps = {
-  item: {
-    backgroundColor:
-      | "primary"
-      | "secondary"
-      | "yellow"
-      | "black"
-      | "darkGrey"
-      | "grey"
-      | "lightGrey"
-      | "white"
-      | "danger"
-      | "orange"
-      | "green"
-      | "teal"
-      | "indigo"
-      | "blue"
-      | "mauve";
-    iconName: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
-    label: string;
-    value: number;
-  };
+  item: PickerItemType;
   onPress: () => void;
 };
 

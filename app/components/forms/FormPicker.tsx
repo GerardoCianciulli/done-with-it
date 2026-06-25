@@ -1,32 +1,12 @@
 import { DimensionValue } from "react-native";
 import { useFormikContext } from "formik";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import Picker from "../Picker";
+import { PickerItemType } from "../PickerItem";
 import { ErrorMessage } from "../forms";
 
 type FormPickerProps = {
-  items: {
-    backgroundColor:
-      | "primary"
-      | "secondary"
-      | "yellow"
-      | "black"
-      | "darkGrey"
-      | "grey"
-      | "lightGrey"
-      | "white"
-      | "danger"
-      | "orange"
-      | "green"
-      | "teal"
-      | "indigo"
-      | "blue"
-      | "mauve";
-    iconName: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
-    label: string;
-    value: number;
-  }[];
+  items: PickerItemType[];
   name: string;
   placeholder: string;
   width?: DimensionValue;

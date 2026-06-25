@@ -6,8 +6,7 @@ const endpoint = "/listings";
 
 const getListings = () => apiClient.get(endpoint);
 
-const addloadListing = (
-  listing: {
+type Listing = {
     category: {
       backgroundColor: string;
       iconName: string;
@@ -19,7 +18,10 @@ const addloadListing = (
     location: { latitude: number; longitude: number } | null;
     price: string;
     title: string;
-  },
+  }
+
+const addloadListing = (
+  listing: Listing,
   onUploadProgress: (percentage: number) => void,
 ) => {
   const data = new FormData();

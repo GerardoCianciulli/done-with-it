@@ -1,3 +1,20 @@
+export type ColorsType =
+  | "primary"
+  | "secondary"
+  | "yellow"
+  | "black"
+  | "darkGrey"
+  | "grey"
+  | "lightGrey"
+  | "white"
+  | "danger"
+  | "orange"
+  | "green"
+  | "teal"
+  | "indigo"
+  | "blue"
+  | "mauve";
+
 export default {
   primary: "#fc5c65",
   secondary: "#4ecdc4",

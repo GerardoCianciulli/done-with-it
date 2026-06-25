@@ -4,7 +4,7 @@ import * as Location from "expo-location";
 import logger from "../utility/logger";
 
 function useLocation() {
-  const [location, setLocation] = useState<Location.LocationObject | null>(
+  const [location, setLocation] = useState<Location.LocationObject | undefined | null>(
     null,
   );
 

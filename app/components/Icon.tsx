@@ -3,41 +3,12 @@ import { View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import defaultStyles from "../config/styles";
+import { ColorsType } from "../config/colors";
 
 type IconProps = {
-  backgroundColor?:
-    | "primary"
-    | "secondary"
-    | "yellow"
-    | "black"
-    | "darkGrey"
-    | "grey"
-    | "lightGrey"
-    | "white"
-    | "danger"
-    | "orange"
-    | "green"
-    | "teal"
-    | "indigo"
-    | "blue"
-    | "mauve";
+  backgroundColor?: ColorsType;
   name: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
-  iconColor?:
-    | "primary"
-    | "secondary"
-    | "yellow"
-    | "black"
-    | "darkGrey"
-    | "grey"
-    | "lightGrey"
-    | "white"
-    | "danger"
-    | "orange"
-    | "green"
-    | "teal"
-    | "indigo"
-    | "blue"
-    | "mauve";
+  iconColor?: ColorsType;
   size?: number;
 };
 

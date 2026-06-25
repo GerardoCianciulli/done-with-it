@@ -13,32 +13,13 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 import Text from "./Text";
 import PickerItem from "./PickerItem";
+import { PickerItemType } from "./PickerItem";
 
 import defaultStyles from "../config/styles";
 
 type PickerProps = {
   iconName?: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
-  items: {
-    backgroundColor:
-      | "primary"
-      | "secondary"
-      | "yellow"
-      | "black"
-      | "darkGrey"
-      | "grey"
-      | "lightGrey"
-      | "white"
-      | "danger"
-      | "orange"
-      | "green"
-      | "teal"
-      | "indigo"
-      | "blue"
-      | "mauve";
-    iconName: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
-    label: string;
-    value: number;
-  }[];
+  items: PickerItemType[];
   numberOfColumns: number;
   onSelectItem: (item: { label: string; value: number }) => void;
   placeholder: string;

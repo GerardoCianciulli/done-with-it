@@ -15,7 +15,7 @@ apiClient.addAsyncRequestTransform(async (request) => {
   if (request.headers) request.headers["x-auth-token"] = authToken;
 });
 
-interface ApiResponse<T, U> {
+type ApiResponse<T, U> = {
   data: T;
   error: U;
 }

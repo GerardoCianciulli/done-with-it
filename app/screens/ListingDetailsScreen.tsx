@@ -67,15 +67,7 @@ function ListingDetailsScreen({ route }: ListingDetailsScreenProps) {
   )
     listing = route.params.item as Listing;
 
-  // console.log("listing,", listing);
-  // "categoryId": 5, http://localhost:9000/api/categories
-  //   "id": 201,
-  //   "images": [{"thumbnailUrl": "http://10.0.0.93:9000/assets/jacket1_thumb.jpg", "url": "http://10.0.0.93:9000/assets/jacket1_full.jpg"}], support mutiple images
-  //   "location": {"latitude": 37.78825, "longitude": -122.4324}, Map
-  //    "userId": 1 http://localhost:9000/api/users
-
   const location = listing?.location;
-  console.log(location);
   return (
     <View style={styles.container}>
       <ScrollView>
