@@ -9,7 +9,7 @@ import {
 } from "../components/lists";
 
 import useAuth from "../hooks/useAuth";
-import myMessages from "../api/messages";
+import messagesApi from "../api/messages";
 import logger from "../utility/logger";
 
 type Message = {
@@ -27,7 +27,7 @@ function MessagesScreen() {
   const [refreshing, setRefreshing] = useState(false);
 
   const getMessages = async () => {
-    const result = await myMessages.getMessages();
+    const result = await messagesApi.getMessages();
     if (!result.ok) {
       return logger.log(new Error(result.originalError as any));
     }

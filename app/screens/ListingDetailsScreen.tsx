@@ -14,7 +14,8 @@ const data = {
   avatar: require("../assets/avatar.png"),
   email: "5 Listings",
 };
-type Listing = {
+
+type ListingType = {
   categoryId: number;
   description: string;
   id: number;
@@ -34,22 +35,7 @@ type Listing = {
 type RootStackParamList = {
   Listings: undefined;
   ListingDetails: {
-    item: {
-      categoryId: number;
-      description: string;
-      id: number;
-      images: {
-        url: string;
-        thumbnailUrl: string;
-      }[];
-      location: {
-        latitude: number;
-        longitude: number;
-      };
-      price: number;
-      title: string;
-      userId: number;
-    };
+    item: ListingType;
   };
 };
 // Define props for the specific screen
@@ -58,14 +44,14 @@ export type ListingDetailsScreenProps =
 
 function ListingDetailsScreen({ route }: ListingDetailsScreenProps) {
   const params = route.params;
-  let listing: Listing | undefined;
+  let listing: ListingType | undefined;
 
   if (
     route.params &&
     typeof route.params === "object" &&
     "item" in route.params
   )
-    listing = route.params.item as Listing;
+    listing = route.params.item as ListingType;
 
   const location = listing?.location;
   return (

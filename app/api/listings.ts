@@ -2,26 +2,14 @@ import { AxiosProgressEvent } from "axios";
 
 import apiClient from "./client";
 
+import { ListingType } from "../screens/ListingEditScreen";
+
 const endpoint = "/listings";
 
 const getListings = () => apiClient.get(endpoint);
 
-type Listing = {
-    category: {
-      backgroundColor: string;
-      iconName: string;
-      label: string;
-      value: number;
-    };
-    description: string;
-    images: string[];
-    location: { latitude: number; longitude: number } | null;
-    price: string;
-    title: string;
-  }
-
 const addloadListing = (
-  listing: Listing,
+  listing: ListingType,
   onUploadProgress: (percentage: number) => void,
 ) => {
   const data = new FormData();

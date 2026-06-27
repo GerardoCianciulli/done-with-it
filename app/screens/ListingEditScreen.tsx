@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as Yup from "yup";
@@ -16,7 +16,10 @@ import Map from "../components/Map";
 
 import defaultStyles from "../config/styles";
 import listingsApi from "../api/listings";
+import categoriesApi from "../api/categories";
 import useLocation from "../hooks/useLocation";
+import { ColorsType } from "../config/colors";
+import logger from "../utility/logger";
 
 const validationSchema = Yup.object().shape({
   category: Yup.object().required().nullable().label("Category"),
@@ -101,9 +104,9 @@ const categories = [
   },
 ];
 
-type Listing = {
+export type ListingType = {
   category: {
-    backgroundColor: string;
+    backgroundColor: ColorsType;
     iconName: string;
     label: string;
     value: number;
@@ -116,11 +119,26 @@ type Listing = {
 };
 
 function ListingEditScreen() {
+  // const [categories, setCategories] = useState<any[]>([]);
   const location = useLocation();
   const [uploadVisible, setUploadVisible] = useState(false);
   const [progress, setProgress] = useState(0);
 
-  const handleSubmit = async (listing: Listing, { resetForm }: any) => {
+  // const getCategories = async () => {
+  //   const result = await categoriesApi.getCategories();
+  //   if (!result.ok) {
+  //     return logger.log(new Error(result.originalError as any));
+  //   }
+  //   if (result.data && Array.isArray(result.data)) {
+  //     setCategories(result.data);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   getCategories();
+  // }, []);
+
+  const handleSubmit = async (listing: ListingType, { resetForm }: any) => {
     setProgress(0);
     setUploadVisible(true);
 
