@@ -9,7 +9,7 @@ import Text from "../components/Text";
 
 import routes from "../navigation/routes";
 
-type RootStackParamList = {
+type WelcomeRootStackParamList = {
   Welcome: undefined;
   Login: undefined;
   Register: undefined;
@@ -17,7 +17,7 @@ type RootStackParamList = {
 
 function WelcomeScreen() {
   const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+    useNavigation<NativeStackNavigationProp<WelcomeRootStackParamList>>();
 
   return (
     <ImageBackground

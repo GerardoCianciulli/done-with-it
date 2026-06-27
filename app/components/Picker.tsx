@@ -21,13 +21,13 @@ type PickerProps = {
   iconName?: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
   items: PickerItemType[];
   numberOfColumns: number;
-  onSelectItem: (item: { label: string; value: number }) => void;
+  onSelectItem: (item: { label: string; id: number }) => void;
   placeholder: string;
   selectedItem:
     | undefined
     | {
         label: string;
-        value: number;
+        id: number;
       };
   width?: DimensionValue;
 };
@@ -76,7 +76,7 @@ function Picker({
             <Button title="Close" onPress={() => setModalVisible(false)} />
             <FlatList
               data={items}
-              keyExtractor={(item) => item.value.toString()}
+              keyExtractor={(item) => item.id.toString()}
               numColumns={numberOfColumns}
               columnWrapperStyle={{ justifyContent: "space-between" }}
               renderItem={({ item }) => (

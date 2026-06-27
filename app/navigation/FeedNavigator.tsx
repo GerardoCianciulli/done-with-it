@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ListingsScreen from "../screens/ListingsScreen";
 import ListingDetailsScreen from "../screens/ListingDetailsScreen";
 
-type RootStackParamList = {
+type FeedRootStackParamList = {
   Listings: undefined;
   ListingDetails: {
     item: {
@@ -16,7 +16,7 @@ type RootStackParamList = {
   };
 };
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator<FeedRootStackParamList>();
 
 const FeedNavigator = () => (
   <Stack.Navigator

@@ -1,12 +1,5 @@
 import { createContext, Dispatch, SetStateAction } from "react";
-
-// Define the shape of your User object
-type User = {
-  userId: number;
-  name: string;
-  email: string;
-  iat: number;
-};
+import { User } from "../screens/LoginScreen";
 
 // Define the shape of the Context itself
 type AuthContextType = {

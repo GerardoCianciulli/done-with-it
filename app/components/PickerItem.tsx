@@ -8,9 +8,9 @@ import { ColorsType } from "../config/colors";
 
 export type PickerItemType = {
   backgroundColor: ColorsType;
-  iconName: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
+  icon: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
   label: string;
-  value: number;
+  id: number;
 };
 
 type PickerItemProps = {
@@ -22,10 +22,10 @@ function PickerItem({ item, onPress }: PickerItemProps) {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
-        {item.iconName && (
+        {item.icon && (
           <Icon
             backgroundColor={item.backgroundColor}
-            name={item.iconName}
+            name={item.icon}
             size={80}
           />
         )}

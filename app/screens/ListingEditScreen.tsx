@@ -29,81 +29,6 @@ const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
 });
 
-const categories = [
-  {
-    label: "Furniture",
-    iconName: "floor-lamp" as React.ComponentProps<
-      typeof MaterialCommunityIcons
-    >["name"],
-    backgroundColor: "danger" as keyof typeof defaultStyles.colors,
-    value: 1,
-  },
-  {
-    label: "Cars",
-    iconName: "car" as React.ComponentProps<
-      typeof MaterialCommunityIcons
-    >["name"],
-    backgroundColor: "orange" as keyof typeof defaultStyles.colors,
-    value: 2,
-  },
-  {
-    label: "Cameras",
-    iconName: "camera" as React.ComponentProps<
-      typeof MaterialCommunityIcons
-    >["name"],
-    backgroundColor: "yellow" as keyof typeof defaultStyles.colors,
-    value: 3,
-  },
-  {
-    label: "Games",
-    iconName: "cards" as React.ComponentProps<
-      typeof MaterialCommunityIcons
-    >["name"],
-    backgroundColor: "green" as keyof typeof defaultStyles.colors,
-    value: 4,
-  },
-  {
-    label: "Clothing",
-    iconName: "shoe-heel" as React.ComponentProps<
-      typeof MaterialCommunityIcons
-    >["name"],
-    backgroundColor: "teal" as keyof typeof defaultStyles.colors,
-    value: 5,
-  },
-  {
-    label: "Sports",
-    iconName: "basketball" as React.ComponentProps<
-      typeof MaterialCommunityIcons
-    >["name"],
-    backgroundColor: "indigo" as keyof typeof defaultStyles.colors,
-    value: 6,
-  },
-  {
-    label: "Movies & Music",
-    iconName: "headphones" as React.ComponentProps<
-      typeof MaterialCommunityIcons
-    >["name"],
-    backgroundColor: "blue" as keyof typeof defaultStyles.colors,
-    value: 7,
-  },
-  {
-    label: "Books",
-    iconName: "book-open-blank-variant" as React.ComponentProps<
-      typeof MaterialCommunityIcons
-    >["name"],
-    backgroundColor: "mauve" as keyof typeof defaultStyles.colors,
-    value: 8,
-  },
-  {
-    label: "Other",
-    iconName: "folder-settings-outline" as React.ComponentProps<
-      typeof MaterialCommunityIcons
-    >["name"],
-    backgroundColor: "grey" as keyof typeof defaultStyles.colors,
-    value: 9,
-  },
-];
-
 export type ListingType = {
   category: {
     backgroundColor: ColorsType;
@@ -119,24 +44,24 @@ export type ListingType = {
 };
 
 function ListingEditScreen() {
-  // const [categories, setCategories] = useState<any[]>([]);
+  const [categories, setCategories] = useState<any[]>([]);
   const location = useLocation();
   const [uploadVisible, setUploadVisible] = useState(false);
   const [progress, setProgress] = useState(0);
 
-  // const getCategories = async () => {
-  //   const result = await categoriesApi.getCategories();
-  //   if (!result.ok) {
-  //     return logger.log(new Error(result.originalError as any));
-  //   }
-  //   if (result.data && Array.isArray(result.data)) {
-  //     setCategories(result.data);
-  //   }
-  // };
+  const getCategories = async () => {
+    const result = await categoriesApi.getCategories();
+    if (!result.ok) {
+      return logger.log(new Error(result.originalError as any));
+    }
+    if (result.data && Array.isArray(result.data)) {
+      setCategories(result.data);
+    }
+  };
 
-  // useEffect(() => {
-  //   getCategories();
-  // }, []);
+  useEffect(() => {
+    getCategories();
+  }, []);
 
   const handleSubmit = async (listing: ListingType, { resetForm }: any) => {
     setProgress(0);

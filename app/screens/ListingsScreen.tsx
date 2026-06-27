@@ -13,43 +13,23 @@ import Card from "../components/Card";
 import { ListItemSeporator } from "../components/lists";
 
 import listingsApi from "../api/listings";
+import { ListingType } from "./ListingDetailsScreen";
+import { ListingRootStackParamList } from "./ListingDetailsScreen";
 import routes from "../navigation/routes";
 import { useApi } from "../hooks/useApi";
 import logger from "../utility/logger";
 
-type Listing = {
-  categoryId: number;
-  description: string;
-  id: number;
-  images: {
-    url: string;
-    thumbnailUrl: string;
-  }[];
-  location: {
-    latitude: number;
-    longitude: number;
-  };
-  price: number;
-  title: string;
-  userId: number;
-};
-
 type ListingsApiResponse = {
-  data: Listing[];
+  data: ListingType[];
   error: boolean;
   loading: boolean;
   request: () => Promise<void>;
 };
 
-type RootStackParamList = {
-  Listings: undefined;
-  ListingDetails: { item: Listing };
-};
-
 function ListingsScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+    useNavigation<NativeStackNavigationProp<ListingRootStackParamList>>();
 
   const {
     data: listings,

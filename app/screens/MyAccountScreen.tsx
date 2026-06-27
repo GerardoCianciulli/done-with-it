@@ -14,24 +14,24 @@ import useAuth from "../hooks/useAuth";
 const menuItems = [
   {
     id: "1",
-    title: "My Listings",
-    iconName: "format-list-bulleted" as React.ComponentProps<
+    label: "My Listings",
+    icon: "format-list-bulleted" as React.ComponentProps<
       typeof MaterialCommunityIcons
     >["name"],
-    iconBackgroundColor: "primary" as keyof typeof colors,
+    backgroundColor: "primary" as keyof typeof colors,
   },
   {
     id: "2",
-    title: "My Messages",
-    iconName: "email" as React.ComponentProps<
+    label: "My Messages",
+    icon: "email" as React.ComponentProps<
       typeof MaterialCommunityIcons
     >["name"],
-    iconBackgroundColor: "secondary" as keyof typeof colors,
+    backgroundColor: "secondary" as keyof typeof colors,
     targetScreen: routes.MESSAGES,
   },
 ];
 
-type RootStackParamList = {
+type AccountRootStackParamList = {
   MyAccount: undefined;
   Messages: undefined;
 };
@@ -40,7 +40,7 @@ function MyAccountScreen() {
   const { logOut, user } = useAuth();
 
   const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+    useNavigation<NativeStackNavigationProp<AccountRootStackParamList>>();
 
   return (
     <SafeAreaView style={styles.screen}>
@@ -55,12 +55,9 @@ function MyAccountScreen() {
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <ListItem
-              title={item.title}
+              title={item.label}
               iconComponent={
-                <Icon
-                  backgroundColor={item.iconBackgroundColor}
-                  name={item.iconName}
-                />
+                <Icon backgroundColor={item.backgroundColor} name={item.icon} />
               }
               onPress={() => navigation.navigate(item.targetScreen as any)}
             />

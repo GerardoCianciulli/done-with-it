@@ -22,7 +22,7 @@ function FormPicker({ items, name, placeholder, width }: FormPickerProps) {
         numberOfColumns={3}
         onSelectItem={(item) => setFieldValue(name, item)}
         placeholder={placeholder}
-        selectedItem={(values as any)[name] as { label: string; value: number }}
+        selectedItem={(values as any)[name] as { label: string; id: number }}
         width={width}
       />
 

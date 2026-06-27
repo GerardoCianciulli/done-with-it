@@ -12,10 +12,10 @@ import colors from "../config/colors";
 const data = {
   name: "Mosh Hamedani",
   avatar: require("../assets/avatar.png"),
-  email: "5 Listings",
+  email: "mosh@domain.com",
 };
 
-type ListingType = {
+export type ListingType = {
   categoryId: number;
   description: string;
   id: number;
@@ -32,15 +32,16 @@ type ListingType = {
   userId: number;
 };
 
-type RootStackParamList = {
+export type ListingRootStackParamList = {
   Listings: undefined;
   ListingDetails: {
     item: ListingType;
   };
 };
+
 // Define props for the specific screen
-export type ListingDetailsScreenProps =
-  NativeStackScreenProps<RootStackParamList>;
+type ListingDetailsScreenProps =
+  NativeStackScreenProps<ListingRootStackParamList>;
 
 function ListingDetailsScreen({ route }: ListingDetailsScreenProps) {
   const params = route.params;

@@ -9,7 +9,7 @@ type MapProps = {
 
 function Map({ location }: MapProps) {
   if (location === undefined || location === null) location = useLocation();
-  console.log("location from Map", location);
+
   return (
     location && (
       <View style={styles.container}>

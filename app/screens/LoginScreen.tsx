@@ -18,7 +18,7 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required().min(4).label("Password"),
 });
 
-type User = {
+export type User = {
   userId: number;
   name: string;
   email: string;
