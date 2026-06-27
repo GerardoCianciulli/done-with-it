@@ -52,7 +52,7 @@ function ListingEditScreen() {
   const getCategories = async () => {
     const result = await categoriesApi.getCategories();
     if (!result.ok) {
-      return logger.log(new Error(result.originalError as any));
+      return logger.log(new Error(result as any));
     }
     if (result.data && Array.isArray(result.data)) {
       setCategories(result.data);

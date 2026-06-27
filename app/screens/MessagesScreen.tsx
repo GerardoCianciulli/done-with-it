@@ -29,7 +29,7 @@ function MessagesScreen() {
   const getMessages = async () => {
     const result = await messagesApi.getMessages();
     if (!result.ok) {
-      return logger.log(new Error(result.originalError as any));
+      return logger.log(new Error(result as any));
     }
 
     if (result.data && Array.isArray(result.data)) {
